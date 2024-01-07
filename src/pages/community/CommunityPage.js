@@ -7,7 +7,7 @@ import {
   useParams,
 } from "react-router-dom";
 
-const CommunityPgae = () => {
+const CommunityPage = () => {
   // 패스 이동
   const navigate = useNavigate();
 
@@ -67,4 +67,4 @@ const CommunityPgae = () => {
   );
 };
 
-export default CommunityPgae;
+export default CommunityPage;
