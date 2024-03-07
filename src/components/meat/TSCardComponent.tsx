@@ -15,6 +15,7 @@ import {
   MeatStoreCard,
   MeatStoreInfo,
   MeatStoreTitle,
+  ReserBtnWrap,
   ReserveBtn,
 } from "./styles/GCardStyle";
 
@@ -29,7 +30,7 @@ const ListCard: React.FC<PropsList> = ({ serverData }) => {
   const baseApi = API_SERVER_HOST;
   const host = `${baseApi}/pic/shop/`;
   const handleReserClick = (
-    e: MouseEvent<HTMLDivElement>,
+    e: MouseEvent<HTMLButtonElement>,
     ishop: number,
     name: string,
   ) => {
@@ -74,22 +75,24 @@ const ListCard: React.FC<PropsList> = ({ serverData }) => {
                     ))}
                 </InfoTagWrap>
                 {/* 예약하기 */}
-                <ReserveBtn
-                  onClick={e => handleReserClick(e, item.ishop, item.name)}
-                >
-                  <span>예약하기</span>
-                </ReserveBtn>
+                <ReserBtnWrap>
+                  <ReserveBtn
+                    onClick={e => handleReserClick(e, item.ishop, item.name)}
+                  >
+                    <span>예약하기</span>
+                  </ReserveBtn>
+                </ReserBtnWrap>
               </MeatStoreBox>
             </MeatStoreInfo>
             <MeatSotreCardImg>
               <OptiPlaceholder
                 src={`${host}${item.ishop}/shop_pic/${item.pics[0]}`}
                 alt={"고기 이미지"}
-                width={380}
-                height={210}
+                width={350}
+                height={240}
                 placeholder={
                   <div>
-                    <OptiWireframe width={380} height={210} />
+                    <OptiWireframe width={350} height={240} />
                   </div>
                 }
               />

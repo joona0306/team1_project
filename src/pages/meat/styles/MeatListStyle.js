@@ -6,19 +6,23 @@ export const ListWrap = styled.div`
   margin: 0 auto;
 `;
 export const KindOfMeatWrap = styled.div`
+  width: 100%;
   display: flex;
-  width: 1180px;
   padding: 30px 0px;
-  align-items: flex-end;
-  gap: 100px;
-  margin: 30px 10px;
+  /* align-items: flex-end; */
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0px;
 `;
 
 export const KindOfMeat = styled.div`
   cursor: pointer;
-  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
   height: 50px;
-  flex-shrink: 0;
+  /* flex-shrink: 0; */
   img {
     width: 70px;
     height: 50px;
@@ -30,15 +34,16 @@ export const KindOfMeat = styled.div`
 `;
 
 export const SearchWrap = styled.div`
-  position: relative;
-  float: right;
-  margin-right: 20px;
+  /* position: relative; */
+  /* float: right; */
+  /* margin-right: 20px; */
   display: flex;
-  align-items: flex-start;
-  gap: 3px;
+  align-items: center;
+  gap: 5px;
+  /* justify-content: sp; */
 `;
 export const SearchBar = styled.div`
-position: relative;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,4 +130,10 @@ export const ListMoreViewBtn = styled.button`
     font-weight: 400;
     line-height: 125%; /* 23.75px */
   }
+`;
+export const ListFilterWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

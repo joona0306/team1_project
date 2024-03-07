@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
 
@@ -34,6 +34,7 @@ const initState: ReviewForm[] = [
     createdAt: "",
     updatedAt: "",
     pics: [""],
+    writerPic: "",
   },
 ];
 export interface ReviewForm {
@@ -49,12 +50,20 @@ export interface ReviewForm {
   createdAt: string;
   updatedAt: string;
   pics: string[];
+  writerPic: string;
 }
 
 const AdminReviewPage = () => {
   // const { adminState } = useCustomLoginTS();
 
   const { page, size, moveToSize } = useCustomHook();
+
+  const [triggerRender, setTriggerRender] = useState<boolean>(false);
+
+  // 리랜더링을 트리거하기 위한 함수
+  const updateRender = () => {
+    setTriggerRender(prev => !prev);
+  };
 
   interface ParamForm {
     page: number;
@@ -63,7 +72,7 @@ const AdminReviewPage = () => {
   const params: ParamForm = { page, size };
   const [refresh, setRefresh] = useState<boolean>(false);
   const { data } = useQuery({
-    queryKey: ["reviewData", params, refresh],
+    queryKey: ["reviewData", params, triggerRender],
     queryFn: () => getReview({ params }),
   });
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -73,7 +82,9 @@ const AdminReviewPage = () => {
 
   const handleMoreView = () => {
     moveToSize({ size: size + 3 });
+    // updateRender();
   };
+
   return (
     <ReviewWrap>
       <TSNavStyle>
@@ -100,7 +111,10 @@ const AdminReviewPage = () => {
               maxWidth: "30%",
             }}
           >
-            <ReviewAdminCard reviewData={reviewData[index]} />
+            <ReviewAdminCard
+              reviewData={reviewData[index]}
+              updateRender={updateRender}
+            />
           </div>
         ))}
       </div>
