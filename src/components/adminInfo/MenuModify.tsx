@@ -177,17 +177,17 @@ const MenuModify = () => {
       if (result) {
         console.log("메뉴 정보 수정 성공");
         console.log("메뉴 정보", menuInfo);
-        openModal("메뉴 정보", "메뉴가 등록 되었습니다.", closeModal);
+        openModal("메뉴 정보", "메뉴가 수정 되었습니다.", closeModal);
         setRefreshTrigger(refreshTrigger * -1);
         setMenuInfo(defaultMenuState);
         return;
       } else {
         console.log("메뉴정보", menuInfo);
-        openModal("메뉴 정보", "등록에 실패하였습니다", closeModal);
+        openModal("메뉴 정보", "수정에 실패하였습니다", closeModal);
         return;
       }
     } catch (error) {
-      console.log("메뉴 정보 등록 안됨");
+      console.log("메뉴 정보 수정 안됨");
       openModal("서버 오류", "관리자에게 문의하세요", closeModal);
       return;
     } finally {
