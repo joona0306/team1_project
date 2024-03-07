@@ -169,11 +169,12 @@ const Read = () => {
   };
 
   const [favorite, setFavorite] = useState(false);
+  const [report, setReport] = useState(false);
 
   useEffect(() => {
     setFetching(true);
     getOneData();
-  }, [iboard, page, favorite]);
+  }, [iboard, page, favorite, report]);
 
   // 해당글의 이미지 큰이미지로 보여주기
   // content.pics가 변경될 때마다 실행됩니다.
@@ -411,7 +412,7 @@ const Read = () => {
       console.log("신고 성공");
       // console.log("신고 -완-");
       openModal("글신고완료", "신고가 완료 되었습니다.", shutModal);
-      setReported(true);
+      setReport(!report);
     },
     onError: error => {
       if (error.response && error.response.status === 404) {
@@ -481,6 +482,7 @@ const Read = () => {
       postCommuCommentReport({ reportCommentData }),
     onSuccess: result => {
       // console.log("값", result);
+      setReport(!report);
       // console.log("신고 -완-");
       openModal("댓글신고완료", "신고가 완료 되었습니다.", shutModal);
     },
@@ -806,7 +808,7 @@ const Read = () => {
                             삭제
                           </div>
                         ) : null}
-                        {content.isCommentReport === 1 ? (
+                        {comment.isCommentReport === 0 ? (
                           <div>
                             <div
                               className="reportBtn"

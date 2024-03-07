@@ -10,6 +10,7 @@ import { List, ListQuery } from "./Meat";
 import {
   KindOfMeat,
   KindOfMeatWrap,
+  ListFilterWrap,
   ListMoreViewBtn,
   ListMoreViewBtnWrap,
   ListWrap,
@@ -150,7 +151,7 @@ const MeatListPage = () => {
         </KindOfMeat>
       </KindOfMeatWrap>
       {/* @COMMENT Filter Test */}
-      <form>
+      <ListFilterWrap>
         <FilterWrapper>
           <SelectedFilter
             onClick={() => handleClickFilter("0")}
@@ -187,7 +188,7 @@ const MeatListPage = () => {
             />
           </SearchIconWrap>
         </SearchWrap>
-      </form>
+      </ListFilterWrap>
 
       {/* <Tscard serverData={serverData} /> */}
       <ListCard serverData={serverData} />

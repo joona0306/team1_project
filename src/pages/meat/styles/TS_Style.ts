@@ -82,11 +82,13 @@ export const SelectedFilter = styled.div<StyledComponentProps>`
 `;
 
 export const FilterWrapper = styled.div`
-  display: inline-flex;
-  align-items: flex-start;
-  padding-left: 20px;
-  gap: 16px;
+  display: flex;
+  width: 180px;
+  align-items: center;
+  /* padding-left: 20px; */
+  /* gap: 16px; */
   justify-content: center;
+  justify-content: space-between;
   button {
     display: flex;
     width: 70px;

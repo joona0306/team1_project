@@ -43,7 +43,17 @@ import OptiWireframe from "../../../components/image-optimization/OptiWireframe"
 
 const baseApi = API_SERVER_HOST;
 
-const ReviewAdminCard = ({ reviewData }: { reviewData: ReviewForm }) => {
+interface ReviewAdminCardProps {
+  reviewData: ReviewForm;
+  updateRender: () => void;
+}
+
+const ReviewAdminCard: React.FC<ReviewAdminCardProps> = ({
+  reviewData,
+  updateRender,
+}) => {
+  // console.log("rf:", setRefresh);
+  const [refresh, setRefresh] = useState(false);
   const { adminState } = useCustomLoginTS();
   console.log("value", reviewData);
   // const {} = useCustomLoginTS();
@@ -73,7 +83,9 @@ const ReviewAdminCard = ({ reviewData }: { reviewData: ReviewForm }) => {
         openModal("등록 성공", "답글 등록을 성공하였습니다.", () => {
           closeModal(),
             // window.location.reload(),
-            setReplyData(replayInitData);
+            updateRender();
+          setReplyData(replayInitData);
+          // setRefresh(!refresh);
         });
       }
     },
@@ -84,6 +96,7 @@ const ReviewAdminCard = ({ reviewData }: { reviewData: ReviewForm }) => {
   const handleClickReply = async (ireview: number, checkShop: number) => {
     // console.log(ireview, checkShop);
     // console.log("작성이 완료되었습니다.");
+
     setReplyData(prevData => ({ ...prevData, ireview, checkShop }));
     // console.log("총 데이터 ", replyData);
     await replyMutation.mutate({ ...replyData, ireview, checkShop });
@@ -130,6 +143,11 @@ const ReviewAdminCard = ({ reviewData }: { reviewData: ReviewForm }) => {
 
   // console.log(formattedDate);
 
+  useEffect(() => {
+    console.log("exist 변경 감지");
+    console.log("refresh 변경 감지", refresh);
+  }, [reviewData?.exist, refresh]);
+
   return (
     <ReviewCardWrap>
       {isModal.isOpen && (
@@ -146,12 +164,33 @@ const ReviewAdminCard = ({ reviewData }: { reviewData: ReviewForm }) => {
               <ReviewUserInfoWrap>
                 <ReviewProfileItem>
                   <div>
-                    <img
-                      src={
-                        process.env.PUBLIC_URL + "/assets/images/favicon.png"
-                      }
-                      alt=""
-                    />
+                    {reviewData?.writerPic === null ? (
+                      <OptiPlaceholder
+                        src={
+                          process.env.PUBLIC_URL + "/assets/images/favicon.png"
+                        }
+                        alt=""
+                        width={40}
+                        height={40}
+                        placeholder={
+                          <div>
+                            <OptiWireframe width={40} height={40} />
+                          </div>
+                        }
+                      />
+                    ) : (
+                      <OptiPlaceholder
+                        src={`${baseApi}/pic/user/${reviewData.iuser}/${reviewData.writerPic}`}
+                        alt=""
+                        width={40}
+                        height={40}
+                        placeholder={
+                          <div>
+                            <OptiWireframe width={40} height={40} />
+                          </div>
+                        }
+                      />
+                    )}
                   </div>
                   <div className="nickname-star-wrap">
                     <div className="user-date">
@@ -195,7 +234,7 @@ const ReviewAdminCard = ({ reviewData }: { reviewData: ReviewForm }) => {
                             <OptiWireframe width={300} height={180} />
                           </div>
                         }
-                        src={`${baseApi}/pic/butcher/${ishop}/review/${reviewData.ireview}/${pic}`}
+                        src={`${baseApi}/pic/shop/${ishop}/review/${reviewData.ireview}/${pic}`}
                       />
                     ) : (
                       <OptiPlaceholder
@@ -235,7 +274,7 @@ const ReviewAdminCard = ({ reviewData }: { reviewData: ReviewForm }) => {
                             <OptiWireframe width={54} height={54} />
                           </div>
                         }
-                        src={`${baseApi}/pic/butcher/${ishop}/review/${reviewData.ireview}/${pic}`}
+                        src={`${baseApi}/pic/shop/${ishop}/review/${reviewData.ireview}/${pic}`}
                       />
                     ) : (
                       <OptiPlaceholder
@@ -278,7 +317,7 @@ const ReviewAdminCard = ({ reviewData }: { reviewData: ReviewForm }) => {
           </ReviewShowWrap>
         </div>
       ) : (
-        <div style={{ marginTop: "30px", marginBottom: "30px" }}>
+        <div style={{ width: "100%" }}>
           <div style={{ float: "right", marginBottom: "20px" }}>
             <MiniBtn
               onClick={inputVisual ? handleClickInputCancel : handleClickInput}

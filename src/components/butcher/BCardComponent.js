@@ -3,14 +3,14 @@ import { useNavigate, useParams } from "react-router";
 import ResultModal from "../common/ResultModal";
 import {
   CardWrapper,
-  InfoTagWrap,
-  ButcherSotreCardImg,
-  ButcherStoreBox,
-  ButcherStoreCard,
-  ButcherStoreInfo,
-  ButcherStoreTitle,
+  MeatSotreCardImg,
+  MeatStoreBox,
+  MeatStoreCard,
+  MeatStoreInfo,
+  MeatStoreTitle,
+  ReserBtnWrap,
   ReserveBtn,
-} from "./styles/BCardStyle";
+} from "../meat/styles/GCardStyle";
 import useCustomHook from "../meat/hooks/useCustomHook";
 import useCustomLoginTS from "../meat/hooks/useCustomLoginTS";
 import { API_SERVER_HOST } from "../../api/meatApi";
@@ -57,33 +57,35 @@ const GCardComponent = ({ data }) => {
       )}
       {data &&
         data.map(item => (
-          <ButcherStoreCard
+          <MeatStoreCard
             key={item.ibutcher}
             onClick={() => moveToRead(item.ibutcher)}
           >
-            <ButcherStoreInfo>
-              <ButcherStoreBox>
-                <ButcherStoreTitle>{item.name}</ButcherStoreTitle>
-                <InfoTagWrap></InfoTagWrap>
+            <MeatStoreInfo>
+              <MeatStoreBox>
+                <MeatStoreTitle>{item.name}</MeatStoreTitle>
+                {/* <InfoTagWrap></InfoTagWrap> */}
                 {/* 예약하기 */}
-                <ReserveBtn
-                  onClick={e =>
-                    moveToBReser(e, item.ibutcher, item.name, item.menuList)
-                  }
-                >
-                  <span>픽업하기</span>
-                </ReserveBtn>
-              </ButcherStoreBox>
-            </ButcherStoreInfo>
-            <ButcherSotreCardImg>
+                <ReserBtnWrap>
+                  <ReserveBtn
+                    onClick={e =>
+                      moveToBReser(e, item.ibutcher, item.name, item.menuList)
+                    }
+                  >
+                    <span>픽업하기</span>
+                  </ReserveBtn>
+                </ReserBtnWrap>
+              </MeatStoreBox>
+            </MeatStoreInfo>
+            <MeatSotreCardImg>
               <OptiPlaceholder
-                width={380}
+                width={350}
                 height={210}
                 src={`${host}${item.ibutcher}/butchershop_pic/${item.pics[0]}`}
                 alt="고기 더미 이미지"
                 placeholder={
                   <div>
-                    <OptiWireframe width={380} height={210} />
+                    <OptiWireframe width={350} height={210} />
                   </div>
                 }
               />
@@ -91,8 +93,8 @@ const GCardComponent = ({ data }) => {
                 src={`${host}${item.ibutcher}/butchershop_pic/${item.pics[0]}`}
                 alt="고기 더미 이미지"
               /> */}
-            </ButcherSotreCardImg>
-          </ButcherStoreCard>
+            </MeatSotreCardImg>
+          </MeatStoreCard>
         ))}
     </CardWrapper>
   );

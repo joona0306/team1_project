@@ -129,7 +129,7 @@ const LoginPage = () => {
   // 회원가입 페이지 이동
   const handleJaddClick = () => {
     if (loginFlag === 0) {
-      navigate("/join/add"); // '/JaddPage'로 이동
+      navigate("/user/signup"); // '/JaddPage'로 이동
     } else {
       // Admin Page
       navigate("/admin/signup");
