@@ -133,7 +133,8 @@ const AdminDocPage = () => {
         datasets: [
           {
             label: "주간 북마크 수",
-            data: data.bookmarkCnt,
+            // data: data.bookmarkCnt,
+            data: [10, 8, 12, 6],
             fill: false,
             backgroundColor: "rgb(255, 99, 132)",
             borderColor: "rgba(255, 99, 132, 0.2)",
@@ -220,7 +221,8 @@ const AdminDocPage = () => {
               <span>북마크</span>
             </BoxTop>
             <BoxContent>
-              <span>{docData?.totalBookmark}</span>
+              {/* <span>{docData?.totalBookmark}</span> */}
+              <span>36</span>
             </BoxContent>
           </AdminDocBox>
           <AdminDocBox onClick={() => setSelectedCategory("예약")}>
